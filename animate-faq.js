@@ -12,17 +12,24 @@ function addAttrToTabs() {
     })
 }
 // reset everything
-function resetAllTabs() {
+function resetAllTabs(firstTime) {
     if (!featureTab) return;
     featureTab.forEach(tabItem => {
-        if (tabItem.getAttribute("isactive") == "true") {
-            tabItem.setAttribute("isactive", false);
-            let contentBox = tabItem.querySelector("[wrapper='content']");
-            let closebtn = tabItem.querySelector("[btn='close']");
-            let openBtn = tabItem.querySelector("[btn='open']");
-            gsap.to(contentBox, { height: "0", ease: "circ.out", duration: 0.4, });
-            gsap.to(openBtn, { display: "block", ease: "circ.out", duration: 0, });
-            gsap.to(closebtn, { display: "none", ease: "circ.out", duration: 0, });
+        let checkFirstElem = [...tabItem.parentElement.childNodes];
+        if(checkFirstElem.length != 0){
+            if((checkFirstElem.indexOf(tabItem) == 0) && firstTime){
+                let openBtn = tabItem.querySelector("[btn='open']");
+                gsap.to(openBtn, { display: "none", ease: "circ.out", duration: 0, });
+            }
+            else if (tabItem.getAttribute("isactive") == "true") {
+                tabItem.setAttribute("isactive", false);
+                let contentBox = tabItem.querySelector("[wrapper='content']");
+                let closebtn = tabItem.querySelector("[btn='close']");
+                let openBtn = tabItem.querySelector("[btn='open']");
+                gsap.to(contentBox, { height: "0", ease: "circ.out", duration: 0.4, });
+                gsap.to(openBtn, { display: "block", ease: "circ.out", duration: 0, });
+                gsap.to(closebtn, { display: "none", ease: "circ.out", duration: 0, });
+            }
         }
     })
 }
@@ -33,7 +40,7 @@ function listenToevents() {
         tab.addEventListener("click", (evt) => {
             let clickedOn = evt.currentTarget;
             if (clickedOn.getAttribute("isactive") == "false") {
-                resetAllTabs();
+                resetAllTabs(false);
                 clickedOn.setAttribute("isactive", true);
                 let getContentTab = clickedOn.querySelector("[wrapper='content']");
                 let closebtn = clickedOn.querySelector("[btn='close']");
@@ -43,12 +50,15 @@ function listenToevents() {
                 gsap.to(openBtn, { display: "none", ease: "circ.out", duration: 0, });
                 gsap.to(closebtn, { display: "block", ease: "circ.out", duration: 0, });
             }
+            else{
+                resetAllTabs(false)
+            }
         })
     })
 }
 
 if(featureTab.length != 0){
     addAttrToTabs();
-    resetAllTabs();
+    resetAllTabs(true);
     listenToevents();
 }
