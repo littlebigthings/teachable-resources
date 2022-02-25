@@ -26,7 +26,7 @@ class ANIMATETABS {
                 getAllcontentTabs.forEach((tab, index) => {
                     if(tab.parentElement != target){
                         getAllTabs[index].setAttribute("isactive", false);
-                        gsap.to(getAllTabs[index], { gridRowGap: "0", ease: "circ.out", duration: 0.2, });
+                        (window.screen.width > 766)&&gsap.to(getAllTabs[index], { gridRowGap: "0", ease: "circ.out", duration: 0.2, });
                         gsap.to(tab, { height: "0", ease: "circ.out", duration: 0.2, });
                         gsap.to(closeIcon[index], { display: "none", ease: "circ.out", duration: 0, });
                         gsap.to(openIcon[index], { display: "block", ease: "circ.out", duration: 0, });
@@ -39,7 +39,7 @@ class ANIMATETABS {
             this.tabItem.setAttribute("isactive", true)
             if (this.tabItem.getAttribute("isactive") == "true" && this.checkFirst != "0") {
                 this.tabItem.setAttribute("isactive", false);
-                gsap.to(this.tabItem, { gridRowGap: "0", ease: "circ.out", duration: 0.2, });
+                (window.screen.width > 766)&&gsap.to(this.tabItem, { gridRowGap: "0", ease: "circ.out", duration: 0.2, });
                 gsap.to(this.toOpenCloseWrp, { height: "0", ease: "circ.out", duration: 0.2, });
                 gsap.to(this.closeIcon, { display: "none", ease: "circ.out", duration: 0, });
             }
@@ -54,14 +54,14 @@ class ANIMATETABS {
             if (this.tabItem.getAttribute("isactive") == "false") {
                 this.resetTab(e.currentTarget);
                 this.tabItem.setAttribute("isactive", true);
-                gsap.to(e.currentTarget, { gridRowGap: this.gridGap, ease: "circ.out", duration: 0.2, });
+                (window.screen.width > 766)&&gsap.to(e.currentTarget, { gridRowGap: this.gridGap, ease: "circ.out", duration: 0.2, });
                 gsap.to(this.toOpenCloseWrp, { height: this.increaseHeight, ease: "circ.out", duration: 0.2, });
                 gsap.to(this.closeIcon, {display: "block", ease: "circ.out", duration: 0,});
                 gsap.to(this.openIcon, { display: "none", ease: "circ.out", duration: 0, });
             }
             else if(this.tabItem.getAttribute("isactive") == "true"){
                 this.tabItem.setAttribute("isactive", false);
-                gsap.to(e.currentTarget, { gridRowGap: 0, ease: "circ.out", duration: 0.2, });
+                (window.screen.width > 766)&&gsap.to(e.currentTarget, { gridRowGap: 0, ease: "circ.out", duration: 0.2, });
                 gsap.to(this.toOpenCloseWrp, { height: 0, ease: "circ.out", duration: 0.2, });
                 gsap.to(this.openIcon, { display: "block", ease: "circ.out", duration: 0, });
                 gsap.to(this.closeIcon, {display: "none", ease: "circ.out", duration: 0,});
