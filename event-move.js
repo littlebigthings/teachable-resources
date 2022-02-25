@@ -85,7 +85,7 @@ class SETCMSEVENTS {
     }
 
     init() {
-        this.addItemsToArray();
+        this.addItemsToArray = this.addItemsToArray.bind(this)
         this.onImagesLoaded(this.addItemsToArray)
     }
 
