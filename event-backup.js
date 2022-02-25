@@ -8,6 +8,9 @@ class ANIMATETABS {
         this.toOpenCloseWrp = this.tabItem.querySelector(".panel-content-wrap");
         this.increaseHeight = this.toOpenCloseWrp.getAttribute("elmheight");
         this.gridGap = window.getComputedStyle(this.tabItem).getPropertyValue("grid-row-gap");
+        this.duration = 1;
+        this.currSection = null;
+        this.ease = "power3.inOut";
         this.init();
     }
 
@@ -19,17 +22,29 @@ class ANIMATETABS {
     resetTab(target) {
         if (target != undefined || target != null) {
             let getAllTabs = target.parentElement.childNodes;
+            let currentTab = target.querySelector(".panel-content-wrap")
             let getAllcontentTabs = target.parentElement.querySelectorAll(".panel-content-wrap");
             let closeIcon = target.parentElement.querySelectorAll(".minus");
             let openIcon = target.parentElement.querySelectorAll(".plus");
-            if(getAllcontentTabs.length != 0){
+            if (getAllcontentTabs.length != 0) {
                 getAllcontentTabs.forEach((tab, index) => {
-                    if(tab.parentElement != target){
+                    if (tab.parentElement.getAttribute("isactive") == "true" && tab != currentTab) {
                         getAllTabs[index].setAttribute("isactive", false);
-                        gsap.to(getAllTabs[index], { gridRowGap: "0", ease: "circ.out", duration: 0.2, });
-                        gsap.to(tab, { height: "0", ease: "circ.out", duration: 0.2, });
-                        gsap.to(closeIcon[index], { display: "none", ease: "circ.out", duration: 0, });
-                        gsap.to(openIcon[index], { display: "block", ease: "circ.out", duration: 0, });
+                        gsap.to(tab, {
+                            height: "0", ease: this.ease, duration: this.duration, onComplete: () => {
+                                if (parseInt(tab.parentElement.getAttribute("data-panel")) > parseInt(target.getAttribute("data-panel"))) {
+                                    this.scrollElemToView(this.currSection)
+                                }
+                            }
+                        });
+                        (window.screen.width > 750) && gsap.to(getAllTabs[index], { gridRowGap: "0", ease: this.ease, duration: this.duration, });
+                        gsap.to(closeIcon[index], { display: "none", ease: this.ease, duration: 0, });
+                        gsap.to(openIcon[index], { display: "block", ease: this.ease, duration: 0, });
+                    }
+                    else if (tab == currentTab) {
+                        setTimeout(() =>{
+                            this.scrollElemToView(this.currSection)
+                        }, this.duration * 1000)
                     }
                 })
             }
@@ -39,34 +54,43 @@ class ANIMATETABS {
             this.tabItem.setAttribute("isactive", true)
             if (this.tabItem.getAttribute("isactive") == "true" && this.checkFirst != "0") {
                 this.tabItem.setAttribute("isactive", false);
-                gsap.to(this.tabItem, { gridRowGap: "0", ease: "circ.out", duration: 0.2, });
-                gsap.to(this.toOpenCloseWrp, { height: "0", ease: "circ.out", duration: 0.2, });
-                gsap.to(this.closeIcon, { display: "none", ease: "circ.out", duration: 0, });
+                gsap.to(this.toOpenCloseWrp, { height: "0", ease: this.ease, duration: this.duration, });
+                (window.screen.width > 750) && gsap.to(this.tabItem, { gridRowGap: "0", ease: this.ease, duration: this.duration, });
+                gsap.to(this.closeIcon, { display: "none", ease: this.ease, duration: 0, });
             }
             else {
-                gsap.to(this.openIcon, { display: "none", ease: "circ.out", duration: 0, });
+                gsap.to(this.openIcon, { display: "none", ease: this.ease, duration: 0, });
             }
         }
     }
 
     listenToevents() {
-        this.tabItem.addEventListener("click", (e) => {
+        this.tabItem.addEventListener("click", async (e) => {
+            this.currSection = e.currentTarget;
             if (this.tabItem.getAttribute("isactive") == "false") {
-                this.resetTab(e.currentTarget);
                 this.tabItem.setAttribute("isactive", true);
-                gsap.to(e.currentTarget, { gridRowGap: this.gridGap, ease: "circ.out", duration: 0.2, });
-                gsap.to(this.toOpenCloseWrp, { height: this.increaseHeight, ease: "circ.out", duration: 0.2, });
-                gsap.to(this.closeIcon, {display: "block", ease: "circ.out", duration: 0,});
+                gsap.to(this.toOpenCloseWrp, { height: this.increaseHeight, ease: "circ.out", duration: this.duration, onComplete: () => { this.resetTab(this.currSection) } });
+                (window.screen.width > 750) && gsap.to(this.currSection, { gridRowGap: this.gridGap, ease: "circ.out", duration: this.duration, },);
+                gsap.to(this.closeIcon, { display: "block", ease: "circ.out", duration: 0, });
                 gsap.to(this.openIcon, { display: "none", ease: "circ.out", duration: 0, });
             }
-            else if(this.tabItem.getAttribute("isactive") == "true"){
+            else {
                 this.tabItem.setAttribute("isactive", false);
-                gsap.to(e.currentTarget, { gridRowGap: 0, ease: "circ.out", duration: 0.2, });
-                gsap.to(this.toOpenCloseWrp, { height: 0, ease: "circ.out", duration: 0.2, });
+                gsap.to(this.toOpenCloseWrp, { height: 0, ease: "circ.out", duration: this.duration, });
+                (window.screen.width > 750) && gsap.to(this.currSection, { gridRowGap: 0, ease: "circ.out", duration: this.duration, },);
                 gsap.to(this.openIcon, { display: "block", ease: "circ.out", duration: 0, });
-                gsap.to(this.closeIcon, {display: "none", ease: "circ.out", duration: 0,});
+                gsap.to(this.closeIcon, { display: "none", ease: "circ.out", duration: 0, });
             }
         })
+    }
+
+    scrollElemToView(target) {
+        if (target != null) {
+            target.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+            });
+        }
     }
 }
 
@@ -85,10 +109,39 @@ class SETCMSEVENTS {
     }
 
     init() {
-        this.addItemsToArray();
+        this.addItemsToArray = this.addItemsToArray.bind(this)
+        this.onImagesLoaded(this.addItemsToArray)
+        // this.addItemsToArray();
+    }
+
+    onImagesLoaded(event) {
+        let images = document.getElementsByClassName("ref-speak-img");
+        if (images.length != 0) {
+            let loaded = images.length;
+            for (let i = 0; i < images.length; i++) {
+                if (images[i].complete) {
+                    loaded--;
+                } else {
+                    images[i].addEventListener("load", function () {
+                        loaded--;
+                        if (loaded == 0) {
+                            event();
+                        }
+                    });
+                }
+                if (loaded == 0) {
+                    event();
+                }
+            }
+        }
     }
 
     addItemsToArray() {
+        const panelCount = {
+            one: 1,
+            two: 1,
+            three: 1,
+        }
         if ((this.eventWrapper != undefined || this.eventWrapper != null) && this.eventItems.length != 0) {
             this.eventItems.forEach(item => {
                 let elementToSetHeight = item.querySelector(".panel-content-wrap");
@@ -97,13 +150,19 @@ class SETCMSEVENTS {
                 let dayData = (checkDay != undefined || checkDay != null) && checkDay.innerHTML.split(" - ")[0];
                 if (typeof (dayData) != undefined || typeof (dayData) != null) {
                     if (dayData === "1") {
+                        item.setAttribute("data-panel", panelCount.one)
                         this.tabObj.tabOne.push(item);
+                        panelCount.one++;
                     }
                     else if (dayData === "2") {
+                        item.setAttribute("data-panel", panelCount.two)
                         this.tabObj.tabTwo.push(item);
+                        panelCount.two++;
                     }
                     else if (dayData === "3") {
+                        item.setAttribute("data-panel", panelCount.three)
                         this.tabObj.tabThree.push(item);
+                        panelCount.three++;
                     }
                 }
             })
