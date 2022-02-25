@@ -105,7 +105,7 @@ class ANIMATECARD {
         this.btn = (this.card != undefined || this.card != null) ? this.card.querySelector("[btn='switch']") : null;
         this.view = (this.btn != undefined || this.btn != null) ? this.btn.querySelector(".view-bio") : null;
         this.collapse = (this.btn != undefined || this.btn != null) ? this.btn.querySelector(".collapse-text") : null;
-        this.timeline = gsap.timeline({ defaults: { duration: 1, ease: "power3.inOut", } });
+        this.timeline = gsap.timeline({ defaults: { duration: 0.4, ease: "power3.inOut", } });
         this.clicked = false;
         this.init();
     }
@@ -120,7 +120,7 @@ class ANIMATECARD {
             this.cardContent.setAttribute("cardHeight", this.cardContent.offsetHeight);
             this.cardContent.setAttribute("pdBtm", parseInt(window.getComputedStyle(this.cardContent).getPropertyValue("padding-bottom")));
             this.cardContent.setAttribute("active", false);
-            this.timeline.to(this.collapse, { display: "none" }, "-=1")
+            this.timeline.to(this.collapse, { display: "none" }, "-=.4")
             this.timeline.to(this.cardContent, { height: 0, paddingBottom: 0 })
         }
     }
@@ -131,14 +131,14 @@ class ANIMATECARD {
                 if (this.cardContent.getAttribute("active") == "false") {
                     this.cardContent.setAttribute("active", true)
                     this.timeline.to(this.cardContent, { height: this.cardContent.getAttribute("cardHeight"), paddingBottom: this.cardContent.getAttribute("pdBtm") });
-                    this.timeline.to(this.view, { display: "none" }, "-=2");
-                    this.timeline.to(this.collapse, { display: "block" }, "-=1")
+                    this.timeline.to(this.view, { display: "none" }, "-=.8");
+                    this.timeline.to(this.collapse, { display: "block" }, "-=.4")
                 }
                 else {
                     this.cardContent.setAttribute("active", false)
                     this.timeline.to(this.cardContent, { height: 0, paddingBottom: 0 });
-                    this.timeline.to(this.collapse, { display: "none" }, "-=2")
-                    this.timeline.to(this.view, { display: "block" }, "-=1");
+                    this.timeline.to(this.collapse, { display: "none" }, "-=.8")
+                    this.timeline.to(this.view, { display: "block" }, "-=.4");
                 }
             })
         }
