@@ -119,6 +119,7 @@ class ANIMATECARD {
         if (this.cardContent != null && target == null) {
             this.cardContent.setAttribute("cardHeight", this.cardContent.offsetHeight);
             this.cardContent.setAttribute("pdBtm", parseInt(window.getComputedStyle(this.cardContent).getPropertyValue("padding-bottom")));
+            this.cardContent.setAttribute("pdTop", parseInt(window.getComputedStyle(this.cardContent).getPropertyValue("padding-top")));
             this.cardContent.setAttribute("active", false);
             this.timeline.to(this.collapse, { display: "none" }, "-=.4")
             this.timeline.to(this.cardContent, { height: 0, paddingBottom: 0 })
@@ -130,7 +131,7 @@ class ANIMATECARD {
             this.btn.addEventListener("click", (e) => {
                 if (this.cardContent.getAttribute("active") == "false") {
                     this.cardContent.setAttribute("active", true)
-                    this.timeline.to(this.cardContent, { height: this.cardContent.getAttribute("cardHeight"), paddingBottom: this.cardContent.getAttribute("pdBtm") });
+                    this.timeline.to(this.cardContent, { height: this.cardContent.getAttribute("cardHeight"), paddingBottom: this.cardContent.getAttribute("pdBtm"), paddingTop: this.cardContent.getAttribute("pdTop")});
                     this.timeline.to(this.view, { display: "none" }, "-=.8");
                     this.timeline.to(this.collapse, { display: "block" }, "-=.4")
                 }
