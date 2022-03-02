@@ -40,7 +40,6 @@ class NAVANIMATION {
                 }
                 let linkToActive = document.querySelector(`[navlink=${elID}]`);
                 if ((linkToActive != undefined || linkToActive != null) && !this.isClicked) {
-                    console.log(this.isClicked)
                     this.updateNav(linkToActive);
                 }
             }
