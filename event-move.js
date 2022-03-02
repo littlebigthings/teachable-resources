@@ -58,7 +58,7 @@ class ANIMATETABS {
                 this.tabItem.setAttribute("isactive", true);
                 (window.screen.width > 766)&&gsap.to(e.currentTarget, { gridRowGap: this.gridGap, ease: "circ.out", duration: 0.2, });
                 gsap.to(this.toOpenCloseWrp, { height: this.increaseHeight, ease: "circ.out", duration: 0.2, });
-                (window.screen.width < 479)&&gsap.to(this.toOpenCloseWrp, {display:"flex", ease: "circ.out", duration: 0, });
+                (window.screen.width < 479)&&gsap.to(this.toOpenCloseWrp, {display:"flex", ease: "circ.out", duration: 0.2, });
                 gsap.to(this.closeIcon, {display: "block", ease: "circ.out", duration: 0,});
                 gsap.to(this.openIcon, { display: "none", ease: "circ.out", duration: 0, });
             }
@@ -66,7 +66,7 @@ class ANIMATETABS {
                 this.tabItem.setAttribute("isactive", false);
                 (window.screen.width > 766)&&gsap.to(e.currentTarget, { gridRowGap: 0, ease: "circ.out", duration: 0.2, });
                 gsap.to(this.toOpenCloseWrp, { height: 0, ease: "circ.out", duration: 0.2, });
-                (window.screen.width < 479)&&gsap.to(this.toOpenCloseWrp, {display:"none", ease: "circ.out", duration: 0, });
+                (window.screen.width < 479)&&gsap.to(this.toOpenCloseWrp, {display:"none", ease: "circ.out", duration: 0.2, });
                 gsap.to(this.openIcon, { display: "block", ease: "circ.out", duration: 0, });
                 gsap.to(this.closeIcon, {display: "none", ease: "circ.out", duration: 0,});
             }
