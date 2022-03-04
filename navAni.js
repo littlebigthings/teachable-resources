@@ -11,12 +11,15 @@ class NAVANIMATION {
         }
         this.isClicked = false;
         this.clickedOn = null;
+        this.linkActive = false;
+        this.navPrevText = null;
         this.init();
     }
 
     init() {
         this.addObserver();
         this.addListener();
+        this.activateResizeEvt();
     }
 
     addObserver() {
@@ -58,13 +61,13 @@ class NAVANIMATION {
                 }
             })
         }
-        else {
-            this.navArray.forEach(item => {
-                if (item.getAttribute("navlink") == "register") {
-                    item.innerHTML = "Register for free";
-                }
-            })
-        }
+        // else {
+        //     this.navArray.forEach(item => {
+        //         if (item.getAttribute("navlink") == "register") {
+        //             item.innerHTML = "Register for free";
+        //         }
+        //     })
+        // }
     }
     addListener() {
         this.navArray.forEach(lnk => {
@@ -89,6 +92,38 @@ class NAVANIMATION {
             behavior: "smooth",
         });
         // this.isClicked = false;
+    }
+    activateResizeEvt() {
+        let resizeTimer;
+        $(window).on("resize", (e) => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                this.checkAndUpdateImgPostion();
+            }, 250);
+        });
+    }
+    checkAndUpdateImgPostion() {
+        let isOnMobile = $(window).width() < 750;
+        if (isOnMobile && !this.linkActive) {
+            this.linkActive = true;
+            this.navArray.forEach(item => {
+                if (item.getAttribute("navlink") == "register") {
+                    this.navPrevText = item.innerHTML;
+                    item.innerHTML = "Register for free";
+                }
+                else{
+                    item.classList.remove("active");
+                }
+            })
+        }
+        else if (!isOnMobile && this.linkActive) {
+            this.linkActive = false;
+            this.navArray.forEach(item => {
+                if (item.getAttribute("navlink") == "register") {
+                    item.innerHTML = this.navPrevText;
+                }
+            })
+        }
     }
 }
 
@@ -130,7 +165,7 @@ class ANIMATECARD {
             this.btn.addEventListener("click", (e) => {
                 if (this.cardContent.getAttribute("active") == "false") {
                     this.cardContent.setAttribute("active", true)
-                    this.timeline.to(this.cardContent, { height: this.cardContent.getAttribute("cardHeight"), paddingBottom: this.cardContent.getAttribute("pdBtm"), paddingTop: this.cardContent.getAttribute("pdTop")});
+                    this.timeline.to(this.cardContent, { height: this.cardContent.getAttribute("cardHeight"), paddingBottom: this.cardContent.getAttribute("pdBtm"), paddingTop: this.cardContent.getAttribute("pdTop") });
                     this.timeline.to(this.view, { display: "none" }, "-=.8");
                     this.timeline.to(this.collapse, { display: "block" }, "-=.4")
                 }
