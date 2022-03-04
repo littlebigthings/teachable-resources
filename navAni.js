@@ -110,6 +110,7 @@ class NAVANIMATION {
                 if (item.getAttribute("navlink") == "register") {
                     this.navPrevText = item.innerHTML;
                     item.innerHTML = "Register for free";
+                    item.classList.add("active");
                 }
                 else{
                     item.classList.remove("active");
