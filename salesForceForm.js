@@ -55,7 +55,7 @@ class SALSEFORCEFORM {
         };
         try {
             const res = await fetch(
-                `https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&oid=${filledData.oid}&email=${filledData.email}&I-agree-to-receive-product-and-marketing-updates-from-Teachable=${filledData.getUpdate}`,
+                `https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&oid=${filledData.oid}&email=${filledData.email}&agree-to-receive-product-and-marketing-updates=${filledData.getUpdate}`,
                 requestOptions
             );
 
