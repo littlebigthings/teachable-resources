@@ -1,10 +1,13 @@
 class SALSEFORCEFORM {
     constructor(currForm) {
         this.currForm = currForm;
-        this.init();
         this.$errorBlock = this.currForm.parentElement.querySelector(".w-form-fail");
         this.redirectUrl = this.currForm.dataset.redirect;
+        this.email = this.currForm.querySelector("[data-input-type='email']");
+        this.checkbox = this.currForm.querySelector("[type='checkbox']");
+        this.oid = this.currForm.querySelector("[name='oid']");
         this.$btn = this.currForm.querySelector("[btn='form']");
+        this.init();
     }
 
     init() {
@@ -13,32 +16,28 @@ class SALSEFORCEFORM {
 
     addListener() {
         this.currForm.addEventListener("submit", (evt) => {
-            // console.log("test")
             evt.preventDefault();
             evt.stopPropagation();
             this.hideMsg();
             if (this.$btn != null) {
                 this.$btn.value = "Please wait..."
             }
-            let currForm = evt.target;
-            let encryMail = sha1(currForm.querySelector("[data-input-type='email']").value);
-            // console.log(encryMail)
-            let filledData = {};
+            let encryMail = sha1(this.currForm.querySelector("[data-input-type='email']").value);
+
+            let filledData = {
+                email:this.email.value,
+                oid:this.oid.value,
+                getUpdate: this.checkbox.value,
+            };
             if (encryMail.length > 0) {
                 ire('trackConversion', "23435", {
                     customerEmail: encryMail,
                 },
                 );
             }
-            let formData = new FormData(currForm);
-            // filledData.email = currForm.querySelector("[data-input-type='email']").value;
-            formData.forEach((key, value) => {
-                filledData[value] = key;
-            });
-            // console.log(filledData)
+
             let resFromSf = this.sendDataToSalseForce(filledData);
-            resFromSf.then((res) => {
-                // console.log(res)
+            resFromSf.then(() => {
                 if (this.redirectUrl != null) {
                     window.location.href = this.redirectUrl;
                 }
@@ -50,20 +49,13 @@ class SALSEFORCEFORM {
     }
 
     async sendDataToSalseForce(filledData) {
-
-        // let data = JSON.stringify(filledData);
-
         var requestOptions = {
             method: "POST",
             mode: 'no-cors',
-            // body: data,
         };
         try {
             const res = await fetch(
-                // `https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&email=${filledData.email}`,
-                `https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&oid=${filledData.oid}&email=${filledData.email}&I-agree-to-receive-product-and-marketing-updates-from-Teachable=${filledData["I-agree-to-receive-product-and-marketing-updates-from-Teachable"]}`,
-                // `https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&oid=${filledData.oid}&email=${filledData.email}`,
-
+                `https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&oid=${filledData.oid}&email=${filledData.email}&I-agree-to-receive-product-and-marketing-updates-from-Teachable=${filledData.getUpdate}`,
                 requestOptions
             );
 
@@ -75,7 +67,6 @@ class SALSEFORCEFORM {
             }
         }
         catch {
-            // console.log("fail")
             this.showMsg(true);
         }
     }
