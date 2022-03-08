@@ -7,6 +7,7 @@ class SALSEFORCEFORM {
         this.checkbox = this.currForm.querySelector("[type='checkbox']");
         this.oid = this.currForm.querySelector("[name='oid']");
         this.$btn = this.currForm.querySelector("[btn='form']");
+        this.pageUrl = window.location.href;
         this.init();
     }
 
@@ -28,6 +29,7 @@ class SALSEFORCEFORM {
                 email:this.email.value,
                 oid:this.oid.value,
                 getUpdate: this.checkbox.value,
+                leadCapturePath:this.pageUrl,
             };
             if (encryMail.length > 0) {
                 ire('trackConversion', "23435", {
@@ -55,7 +57,7 @@ class SALSEFORCEFORM {
         };
         try {
             const res = await fetch(
-                `https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&oid=${filledData.oid}&email=${filledData.email}&agree-to-receive-product-and-marketing-updates=${filledData.getUpdate}`,
+                `https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&oid=${filledData.oid}&email=${filledData.email}&agree-to-receive-product-and-marketing-updates=${filledData.getUpdate}&lead-capture-path=${filledData.leadCapturePath}`,
                 requestOptions
             );
 
