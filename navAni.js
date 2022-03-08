@@ -19,6 +19,7 @@ class NAVANIMATION {
     init() {
         this.addObserver();
         this.addListener();
+        this.checkAndUpdateImgPostion();
         this.activateResizeEvt();
     }
 
