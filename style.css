@@ -1,0 +1,24 @@
+/* hide the calander icon */
+.addeventatc .addeventatc_icon{
+    display: none;
+}
+
+/* to style the link */
+.addeventatc {
+    color: #21cd9c !important;
+    font-size: 1.388em !important;
+    line-height: 1.33 !important;
+    box-shadow:none !important;
+    font-family: 'Basis grotesque pro', sans-serif !important;
+    background:none !important;
+    border: none !important;
+    padding: 0px !important;
+    font-weight: 400 !important;
+    outline-color:transparent !important;
+    border-radius: 0px !important;
+    text-shadow:none !important;
+    text-decoration: underline !important;
+}
+.addeventatc:hover{
+    background: none !important;
+}
