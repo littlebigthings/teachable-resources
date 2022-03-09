@@ -5,7 +5,7 @@ class SALSEFORCEFORM {
         this.redirectUrl = this.currForm.dataset.redirect;
         this.email = this.currForm.querySelector("[data-input-type='email']");
         this.checkbox = this.currForm.querySelector("[type='checkbox']");
-        this.oid = this.currForm.querySelector("[name='oid']");
+        // this.oid = this.currForm.querySelector("[name='oid']");
         this.$btn = this.currForm.querySelector("[btn='form']");
         this.pageUrl = window.location.href;
         this.init();
@@ -27,9 +27,10 @@ class SALSEFORCEFORM {
 
             let filledData = {
                 email:this.email.value,
-                oid:this.oid.value,
                 getUpdate: this.checkbox.value,
+                oid:"00D3t000003xIvk",
                 leadCapturePath:this.pageUrl,
+                moduleId:"hero",
             };
             if (encryMail.length > 0) {
                 ire('trackConversion', "23435", {
@@ -57,7 +58,8 @@ class SALSEFORCEFORM {
         };
         try {
             const res = await fetch(
-                `https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&oid=${filledData.oid}&email=${filledData.email}&agree-to-receive-product-and-marketing-updates=${filledData.getUpdate}&lead-capture-path=${filledData.leadCapturePath}`,
+                // `https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&oid=${filledData.oid}&email=${filledData.email}&agree-to-receive-product-and-marketing-updates=${filledData.getUpdate}&lead-capture-path=${filledData.leadCapturePath}`,
+                `https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&oid=${filledData.oid}&email=${filledData.email}&agree-to-receive-product-and-marketing-updates=${filledData.getUpdate}&00N3t00000GH4mJ=${filledData.leadCapturePath}&00N3t00000GH4mO=${filledData.moduleId}`,
                 requestOptions
             );
 
