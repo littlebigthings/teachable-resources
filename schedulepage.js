@@ -53,6 +53,8 @@ class ANIMATETABS {
 
     listenToevents() {
         this.tabItem.addEventListener("click", (e) => {
+            let clickedOn = e.target;
+            if(clickedOn.classList.contains("addeventatc"))return;
             if (this.tabItem.getAttribute("isactive") == "false") {
                 this.resetTab(e.currentTarget);
                 this.tabItem.setAttribute("isactive", true);
