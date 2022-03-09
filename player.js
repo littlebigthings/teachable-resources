@@ -1,5 +1,5 @@
 window._wq = window._wq || [];
-_wq.push({ id: "mf7j49f1jp", onReady: function(video) {
+_wq.push({ id: "n49frfp9tf", onReady: function(video) {
     let playBtn = document.querySelector(".play-button");
     let pauseBtn = document.querySelector(".pause-button");
     let videoWrapper = document.querySelector(".video-btn-wrap");
