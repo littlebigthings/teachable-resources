@@ -20,15 +20,15 @@ class SOCIALSLIDER {
                 depth: 350,
                 modifier: 2,
                 scale: 1.2,
-                // transformEl: ".success-card",
+                transformEl: ".success-card",
             },
             loop: true,
             loopFillGroupWithBlank: true,
             centeredSlides: true,
-            // autoplay: {
-            //     delay: 3000,
-            //     disableOnInteraction: false,
-            // },
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
             pagination: {
                 el: ".swiper-pagination",
                 clickable: true,
