@@ -7,6 +7,8 @@ class UPDATEPRICE {
         this.discountMonthlyPriceArr = document.querySelectorAll("[monthly-price='discount']");
         this.actualAnnualPriceArr = document.querySelectorAll("[annual-price='actual']");
         this.discountAnnualPriceArr = document.querySelectorAll("[annual-price='discount']");
+        this.subTextMonthly = document.querySelectorAll("[sub-text='monthly']");
+        this.subTextAnnual = document.querySelectorAll("[sub-text='annual']");
         this.init();
     }
 
@@ -59,6 +61,12 @@ class UPDATEPRICE {
                 this.discountMonthlyPriceArr.forEach(priceElm => {
                     priceElm.classList.remove("hide");
                 });
+                this.subTextMonthly.forEach(priceElm => {
+                    priceElm.classList.remove("hide");
+                });
+                this.subTextAnnual.forEach(priceElm => {
+                    priceElm.classList.add("hide");
+                });
             }
             else if (annual) {
                 this.monthBtnArr.forEach(btn => {
@@ -77,6 +85,12 @@ class UPDATEPRICE {
                     priceElm.classList.remove("hide");
                 });
                 this.discountAnnualPriceArr.forEach(priceElm => {
+                    priceElm.classList.remove("hide");
+                });
+                this.subTextMonthly.forEach(priceElm => {
+                    priceElm.classList.add("hide");
+                });
+                this.subTextAnnual.forEach(priceElm => {
                     priceElm.classList.remove("hide");
                 });
             }
