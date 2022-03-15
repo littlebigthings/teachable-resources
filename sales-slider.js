@@ -25,10 +25,10 @@ class SOCIALSLIDER {
             loop: true,
             loopFillGroupWithBlank: true,
             centeredSlides: true,
-            autoplay: {
-                delay: 3000,
-                disableOnInteraction: false,
-            },
+            // autoplay: {
+            //     delay: 3000,
+            //     disableOnInteraction: false,
+            // },
             pagination: {
                 el: ".swiper-pagination",
                 clickable: true,
