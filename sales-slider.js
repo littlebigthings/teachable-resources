@@ -1,8 +1,12 @@
 class SOCIALSLIDER {
     constructor() {
+        this.stretchVal = 70;
         this.init();
     }
     init() {
+        if(window.screen.width > 767){
+            this.stretchVal = 40;
+        }
         this.newSlider();
     }
 
@@ -16,7 +20,7 @@ class SOCIALSLIDER {
             coverflowEffect: {
                 slideShadows: false,
                 rotate: 0,
-                stretch: 70,
+                stretch: this.stretchVal,
                 depth: 150,
                 modifier: 0.8,
                 scale: 0.8,
