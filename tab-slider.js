@@ -40,7 +40,7 @@ class TabSlider {
       let elHeight = 0;
       [...tabItem.children].forEach(chNd => {
         if (chNd.style.display != "none") {
-          elHeight = elHeight + chNd.getBoundingClientRect().height +  window.getComputedStyle(chNd).getPropertyValue('margin-top');
+          elHeight = elHeight + parseInt(chNd.getBoundingClientRect().height) +  parseInt(window.getComputedStyle(chNd).getPropertyValue('margin-top'));
         }
         tabItem.setAttribute("tab-height", elHeight)
       })
