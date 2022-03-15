@@ -12,6 +12,7 @@ class UPDATEPRICE {
 
     init() {
         this.listenToClick();
+        this.openDefault();
     }
 
     listenToClick() {
@@ -31,6 +32,12 @@ class UPDATEPRICE {
         })
     }
 
+    openDefault(){
+        // code to select default active state of prices.
+        this.annualBtnArr["0"].click();
+        // comment the above and uncomment the below one to make month default.
+        // this.monthBtnArr[0].click();
+    }
     resetPrice(monthly, annual) {
         if ((this.actualMonthlyPriceArr.length > 0 && this.discountMonthlyPriceArr.length > 0) && (this.actualAnnualPriceArr.length > 0 && this.discountAnnualPriceArr.length > 0)) {
             if (monthly) {
@@ -41,16 +48,16 @@ class UPDATEPRICE {
                     btn.classList.remove("active");
                 });
                 this.actualAnnualPriceArr.forEach(priceElm => {
-                    priceElm.style.display = "none";
+                    priceElm.classList.add("hide");
                 });
                 this.discountAnnualPriceArr.forEach(priceElm => {
-                    priceElm.style.display = "none";
+                    priceElm.classList.add("hide");
                 });
                 this.actualMonthlyPriceArr.forEach(priceElm => {
-                    priceElm.style.display = "block";
+                    priceElm.classList.remove("hide");
                 });
                 this.discountMonthlyPriceArr.forEach(priceElm => {
-                    priceElm.style.display = "block";
+                    priceElm.classList.remove("hide");
                 });
             }
             else if (annual) {
@@ -61,16 +68,16 @@ class UPDATEPRICE {
                     btn.classList.add("active");
                 });
                 this.actualMonthlyPriceArr.forEach(priceElm => {
-                    priceElm.style.display = "none";
+                    priceElm.classList.add("hide");
                 });
                 this.discountMonthlyPriceArr.forEach(priceElm => {
-                    priceElm.style.display = "none";
+                    priceElm.classList.add("hide");
                 });
                 this.actualAnnualPriceArr.forEach(priceElm => {
-                    priceElm.style.display = "block";
+                    priceElm.classList.remove("hide");
                 });
                 this.discountAnnualPriceArr.forEach(priceElm => {
-                    priceElm.style.display = "block";
+                    priceElm.classList.remove("hide");
                 });
             }
         }
