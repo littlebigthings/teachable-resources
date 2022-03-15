@@ -127,15 +127,15 @@ class TabSlider {
     }
 
     this.textToChange.html(cardText);
-    if(textToActive != undefined || textToActive != null)textToActive.classList.add("active-platform");
+    if(textToActive != undefined || textToActive != null)textToActive.addClass("active-platform");
     this.$sliderDeskImg.attr("src", imgHref);
-    if ($(window).width() < 767) {
+    // if ($(window).width() < 767) {
       const otherTabs = this.$sliderTabs.not($currTab);
       [...otherTabs].forEach(this.closeTab);
-    } else {
-      const otherTabs = this.$sliderTabs;
-      [...otherTabs].forEach(this.closeTab);
-    }
+    // } else {
+    //   const otherTabs = this.$sliderTabs;
+    //   [...otherTabs].forEach(this.closeTab);
+    // }
     this.currTab = this.$sliderTabs.index($currTab) + 1;
     if (isClicked) {
       this.timerId && clearInterval(this.timerId);
@@ -150,7 +150,7 @@ class TabSlider {
     const closeBtn = $currTab.find("[btn='close']");
     const textToActive = $currTab.find("[platform='title']");
     $currTab.removeClass(this.activeCardClass);
-    if(textToActive != undefined || textToActive != null)textToActive.classList.add("active-platform");
+    if(textToActive != undefined || textToActive != null)textToActive.removeClass("active-platform");
     gsap.to($btmTab[0], {
       height: "0px",
       duration: this.aniDuration,
