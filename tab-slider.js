@@ -102,16 +102,21 @@ class TabSlider {
     const $btmTab = $currTab.find("[wrapper='platform-content']");
     const imgHref = $currTab.find(`[data-img=${this.sliderMBImgClass}]`).attr("src");
     const cardText = $btmTab.find(`${this.cardDetailClass}`).html();
+    const textToActive = $currTab.find("[platform='title']");
+    const openBtn = $currTab.find("[btn='open']");
+    const closeBtn = $currTab.find("[btn='close']");
     $currTab.addClass(this.activeCardClass);
-    
+
     // console.log(this.textToChange)
     if ($(window).width() < 767) {
-    gsap.to($btmTab[0], {
-      height: `${$btmTab.attr("tab-height")}px`,
-      duration: this.aniDuration,
-      ease: "Power1.easeInOut",
-    });
-  }
+      gsap.to($btmTab[0], {
+        height: `${$btmTab.attr("tab-height")}px`,
+        duration: this.aniDuration,
+        ease: "Power1.easeInOut",
+      });
+      openBtn.hide();
+      closeBtn.show();
+    }
 
     if (!isMouseLeave) {
       gsap.fromTo(
@@ -122,13 +127,14 @@ class TabSlider {
     }
 
     this.textToChange.html(cardText);
+    if(textToActive != undefined || textToActive != null)textToActive.classList.add("active-platform");
     this.$sliderDeskImg.attr("src", imgHref);
     if ($(window).width() < 767) {
-    const otherTabs = this.$sliderTabs.not($currTab);
-    [...otherTabs].forEach(this.closeTab);
-    }else{
+      const otherTabs = this.$sliderTabs.not($currTab);
+      [...otherTabs].forEach(this.closeTab);
+    } else {
       const otherTabs = this.$sliderTabs;
-    [...otherTabs].forEach(this.closeTab);
+      [...otherTabs].forEach(this.closeTab);
     }
     this.currTab = this.$sliderTabs.index($currTab) + 1;
     if (isClicked) {
@@ -140,13 +146,21 @@ class TabSlider {
   closeTab(ele) {
     const $currTab = $(ele);
     const $btmTab = $currTab.find("[wrapper='platform-content']");
+    const openBtn = $currTab.find("[btn='open']");
+    const closeBtn = $currTab.find("[btn='close']");
+    const textToActive = $currTab.find("[platform='title']");
     $currTab.removeClass(this.activeCardClass);
-
+    if(textToActive != undefined || textToActive != null)textToActive.classList.add("active-platform");
     gsap.to($btmTab[0], {
       height: "0px",
       duration: this.aniDuration,
       ease: "Power1.easeInOut",
     });
+
+    if ($(window).width() < 767) {
+      openBtn.show();
+      closeBtn.hide();
+    }
   }
 
   startAutoAni(runInstant) {
