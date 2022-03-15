@@ -20,7 +20,7 @@ class SOCIALSLIDER {
                 depth: 350,
                 modifier: 2,
                 scale: 1.2,
-                transformEl: ".success-card",
+                // transformEl: ".success-card",
             },
             loop: true,
             loopFillGroupWithBlank: true,
