@@ -4,7 +4,7 @@ class ANIMATETABS {
         this.checkFirst = (this.tabItem != undefined || this.tabItem != null) && [...this.tabItem.parentElement.children].indexOf(this.tabItem);
         this.openCloseBtn = this.tabItem.querySelector(".open-close-btn");
         this.openIcon = (this.openCloseBtn != undefined || this.openCloseBtn != null) && this.openCloseBtn.querySelector(".plus");
-        this.closeIcon = (this.openCloseBtn != undefined || this.openCloseBtn != null) && this.openCloseBtn.querySelector(".minus");
+        // this.closeIcon = (this.openCloseBtn != undefined || this.openCloseBtn != null) && this.openCloseBtn.querySelector(".minus");
         this.toOpenCloseWrp = this.tabItem.querySelector(".panel-content-wrap");
         this.increaseHeight = this.toOpenCloseWrp.getAttribute("elmheight");
         this.gridGap = window.getComputedStyle(this.tabItem).getPropertyValue("grid-row-gap");
@@ -29,8 +29,9 @@ class ANIMATETABS {
                         gsap.to(tab, { height: "0", ease: "circ.out", duration: 0.2, });
                         (window.screen.width > 766)&&gsap.to(getAllTabs[index], { gridRowGap: "0", ease: "circ.out", duration: 0.2, });
                         (window.screen.width < 479)&&gsap.to(tab, {display:"none", ease: "circ.out", duration: 0.2, });
-                        gsap.to(closeIcon[index], { display: "none", ease: "circ.out", duration: 0, });
-                        gsap.to(openIcon[index], { display: "block", ease: "circ.out", duration: 0, });
+                        // gsap.to(closeIcon[index], { display: "none", ease: "circ.out", duration: 0, });
+                        // gsap.to(openIcon[index], { display: "block", ease: "circ.out", duration: 0, });
+                        gsap.to(openIcon[index], { transformStyle:"preserve-3d", transform: "rotate3d(1, 0, 0, 0deg)", ease: "circ.out", duration: 0.4, });
                     }
                 })
             }
@@ -43,10 +44,11 @@ class ANIMATETABS {
                 (window.screen.width > 766)&&gsap.to(this.tabItem, { gridRowGap: "0", ease: "circ.out", duration: 0.2, });
                 (window.screen.width < 479)&&gsap.to(this.toOpenCloseWrp, { display:"none", ease: "circ.out", duration: 0.2, });
                 gsap.to(this.toOpenCloseWrp, { height: "0", ease: "circ.out", duration: 0.2, });
-                gsap.to(this.closeIcon, { display: "none", ease: "circ.out", duration: 0, });
+                // gsap.to(this.closeIcon, { display: "none", ease: "circ.out", duration: 0, });
+                gsap.to(this.openIcon, { transformStyle:"preserve-3d", transform: "rotate3d(1, 0, 0, 0deg)",  ease: "circ.out", duration: 0.4, });
             }
             else {
-                gsap.to(this.openIcon, { display: "none", ease: "circ.out", duration: 0, });
+                gsap.to(this.openIcon, { transformStyle:"preserve-3d", transform: "rotate3d(1, 0, 0, 180deg)",  ease: "circ.out", duration: 0.4, });
             }
         }
     }
@@ -59,16 +61,18 @@ class ANIMATETABS {
                 (window.screen.width > 766)&&gsap.to(e.currentTarget, { gridRowGap: this.gridGap, ease: "circ.out", duration: 0.2, });
                 gsap.to(this.toOpenCloseWrp, { height: this.increaseHeight, ease: "circ.out", duration: 0.2, });
                 (window.screen.width < 479)&&gsap.to(this.toOpenCloseWrp, {display:"flex", ease: "circ.out", duration: 0.2, });
-                gsap.to(this.closeIcon, {display: "block", ease: "circ.out", duration: 0,});
-                gsap.to(this.openIcon, { display: "none", ease: "circ.out", duration: 0, });
+                // gsap.to(this.closeIcon, {display: "block", ease: "circ.out", duration: 0,});
+                // gsap.to(this.openIcon, { display: "none", ease: "circ.out", duration: 0, });
+                gsap.to(this.openIcon, { transformStyle:"preserve-3d", transform: "rotate3d(1, 0, 0, 180deg)", ease: "circ.out", duration: 0.4, });
             }
             else if(this.tabItem.getAttribute("isactive") == "true"){
                 this.tabItem.setAttribute("isactive", false);
                 (window.screen.width > 766)&&gsap.to(e.currentTarget, { gridRowGap: 0, ease: "circ.out", duration: 0.2, });
                 gsap.to(this.toOpenCloseWrp, { height: 0, ease: "circ.out", duration: 0.2, });
                 (window.screen.width < 479)&&gsap.to(this.toOpenCloseWrp, {display:"none", ease: "circ.out", duration: 0.2, });
-                gsap.to(this.openIcon, { display: "block", ease: "circ.out", duration: 0, });
-                gsap.to(this.closeIcon, {display: "none", ease: "circ.out", duration: 0,});
+                // gsap.to(this.openIcon, { display: "block", ease: "circ.out", duration: 0, });
+                // gsap.to(this.closeIcon, {display: "none", ease: "circ.out", duration: 0,});
+                gsap.to(this.openIcon, { transformStyle:"preserve-3d", transform: "rotate3d(1, 0, 0, 0deg)", ease: "circ.out", duration: 0.4, });
             }
         })
     }
