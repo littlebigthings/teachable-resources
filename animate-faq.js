@@ -19,16 +19,16 @@ function resetAllTabs(firstTime) {
         if(checkFirstElem.length != 0){
             if((checkFirstElem.indexOf(tabItem) == 0) && firstTime){
                 let openBtn = tabItem.querySelector("[btn='open']");
-                gsap.to(openBtn, { display: "none", ease: "circ.out", duration: 0, });
+                gsap.to(openBtn, { transformStyle:"preserve-3d", transform: "rotate3d(1, 0, 0, 180deg)", ease: "circ.out", duration: 0.4, });
             }
             else if (tabItem.getAttribute("isactive") == "true") {
                 tabItem.setAttribute("isactive", false);
                 let contentBox = tabItem.querySelector("[wrapper='content']");
-                let closebtn = tabItem.querySelector("[btn='close']");
+                // let closebtn = tabItem.querySelector("[btn='close']");
                 let openBtn = tabItem.querySelector("[btn='open']");
                 gsap.to(contentBox, { height: "0", ease: "circ.out", duration: 0.4, });
-                gsap.to(openBtn, { display: "block", ease: "circ.out", duration: 0, });
-                gsap.to(closebtn, { display: "none", ease: "circ.out", duration: 0, });
+                gsap.to(openBtn, { transformStyle:"preserve-3d", transform: "rotate3d(1, 0, 0, 0deg)", ease: "circ.out", duration: 0.4, });
+                // gsap.to(closebtn, { display: "none", ease: "circ.out", duration: 0, });
             }
         }
     })
@@ -43,12 +43,12 @@ function listenToevents() {
                 resetAllTabs(false);
                 clickedOn.setAttribute("isactive", true);
                 let getContentTab = clickedOn.querySelector("[wrapper='content']");
-                let closebtn = clickedOn.querySelector("[btn='close']");
+                // let closebtn = clickedOn.querySelector("[btn='close']");
                 let openBtn = clickedOn.querySelector("[btn='open']");
                 let increaseHeight = getContentTab.getAttribute("wrpheight");
                 gsap.to(getContentTab, { height: increaseHeight, ease: "circ.out", duration: 0.4, });
-                gsap.to(openBtn, { display: "none", ease: "circ.out", duration: 0, });
-                gsap.to(closebtn, { display: "block", ease: "circ.out", duration: 0, });
+                gsap.to(openBtn, { transformStyle:"preserve-3d", transform: "rotate3d(1, 0, 0, 180deg)", ease: "circ.out", duration: 0.4, });
+                // gsap.to(closebtn, { display: "block", ease: "circ.out", duration: 0, });
             }
             else{
                 resetAllTabs(false)
