@@ -1,11 +1,11 @@
 class SOCIALSLIDER {
     constructor() {
-        this.stretchVal = 70;
+        this.stretchVal = (40/1440)*window.innerWidth;
         this.init();
     }
     init() {
         if(window.screen.width > 767){
-            this.stretchVal = 40;
+            this.stretchVal = (110/1440)*window.innerWidth;
         }
         this.newSlider();
     }
