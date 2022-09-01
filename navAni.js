@@ -13,6 +13,7 @@ class NAVANIMATION {
         this.clickedOn = null;
         this.linkActive = false;
         this.navPrevText = null;
+        this.stickyNav = document.querySelector(".sticky-navbar");
         this.init();
     }
 
@@ -87,7 +88,7 @@ class NAVANIMATION {
 
     scrollToSection(section) {
         let elDistanceToTop = window.pageYOffset + section.getBoundingClientRect().top;
-        let topDistance = window.screen.width >= 768 ? 0 : 135;
+        let topDistance = window.screen.width >= 768 ? 0 : parseInt(window.getComputedStyle(this.stickyNav).getPropertyValue("height"));
         window.scrollTo({
             top: elDistanceToTop - topDistance,
             behavior: "smooth",
