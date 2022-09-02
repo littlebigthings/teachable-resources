@@ -28,7 +28,6 @@ class SALSEFORCEFORM {
             let euData = $(this.currForm).data("eu");
            
             if(euData == true){
-                console.log(this.checkbox.checked)
                 if(this.checkbox.checked){
                     checkBoxVal = this.checkbox.value
                 }else{
