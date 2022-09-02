@@ -64,7 +64,7 @@ class SALSEFORCEFORM {
             let resFromSf = this.sendDataToSalseForce(filledData);
             resFromSf.then(() => {
                 if (this.redirectUrl != null) {
-                    window.location.href = this.redirectUrl;
+                    window.location.href = this.redirectUrl+this.utmData;
                 }
                 else {
                     window.location.href = `/confirmed${this.utmData}`;
