@@ -26,12 +26,17 @@ class SALSEFORCEFORM {
             let encryMail = sha1(this.currForm.querySelector("[data-input-type='email']").value);
             let checkBoxVal = 'on';
             let euData = $(this.currForm).data("eu");
+            let checkboxShowed=false;
+            let checkboxChecked = false;
            
             if(euData == true){
+                checkboxShowed = true;
                 if(this.checkbox.checked){
                     checkBoxVal = this.checkbox.value
+                    checkboxChecked = true;
                 }else{
                     checkBoxVal = 'off';
+                    checkboxChecked= false;
                 }
             }
             else{
@@ -44,6 +49,9 @@ class SALSEFORCEFORM {
                 oid:"00D3t000003xIvk",
                 leadCapturePath:this.pageUrl,
                 moduleId:"hero",
+                checkboxChecked:checkboxChecked,
+                checkboxShowed:checkboxShowed,
+
             };
             if (encryMail.length > 0) {
                 ire('trackConversion', "23435", {
@@ -72,7 +80,7 @@ class SALSEFORCEFORM {
         try {
             const res = await fetch(
                 // `https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&oid=${filledData.oid}&email=${filledData.email}&agree-to-receive-product-and-marketing-updates=${filledData.getUpdate}&lead-capture-path=${filledData.leadCapturePath}`,
-                `https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&oid=${filledData.oid}&email=${filledData.email}&agree-to-receive-product-and-marketing-updates=${filledData.getUpdate}&00N3t00000GH4mJ=${filledData.leadCapturePath}&00N3t00000GH4mO=${filledData.moduleId}`,
+                `https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&oid=${filledData.oid}&email=${filledData.email}&agree-to-receive-product-and-marketing-updates=${filledData.getUpdate}&00N3t00000GH4mJ=${filledData.leadCapturePath}&00N3t00000GH4mO=${filledData.moduleId}&00N3t00000GH3mS=${filledData.checkboxChecked}&00N3t00000GH4mE=${filledData.checkboxShowed}`,
                 requestOptions
             );
 
