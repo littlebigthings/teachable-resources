@@ -24,10 +24,24 @@ class SALSEFORCEFORM {
                 this.$btn.value = "Please wait..."
             }
             let encryMail = sha1(this.currForm.querySelector("[data-input-type='email']").value);
-
+            let checkBoxVal = 'on';
+            let euData = $(this.currForm).data("eu");
+           
+            if(euData == true){
+                console.log(this.checkbox.checked)
+                if(this.checkbox.checked){
+                    checkBoxVal = this.checkbox.value
+                }else{
+                    checkBoxVal = 'off';
+                }
+            }
+            else{
+                checkBoxVal = "on";
+            }
+            
             let filledData = {
                 email:this.email.value,
-                getUpdate: this.checkbox.value,
+                getUpdate: checkBoxVal,
                 oid:"00D3t000003xIvk",
                 leadCapturePath:this.pageUrl,
                 moduleId:"hero",
