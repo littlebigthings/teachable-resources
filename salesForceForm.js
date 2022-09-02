@@ -8,6 +8,7 @@ class SALSEFORCEFORM {
         // this.oid = this.currForm.querySelector("[name='oid']");
         this.$btn = this.currForm.querySelector("[btn='form']");
         this.pageUrl = window.location.href;
+        this.utmData = document.location.search;
         this.init();
     }
 
@@ -66,7 +67,7 @@ class SALSEFORCEFORM {
                     window.location.href = this.redirectUrl;
                 }
                 else {
-                    window.location.href = "/confirmed";
+                    window.location.href = `/confirmed${this.utmData}`;
                 }
             })
         })
