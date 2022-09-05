@@ -29,6 +29,7 @@ class SALSEFORCEFORM {
             let euData = $(this.currForm).data("eu");
             let checkboxShowed=false;
             let checkboxChecked = false;
+            let encodedEmail = encodeURIComponent(this.email.value);
            
             if(euData == true){
                 checkboxShowed = true;
@@ -45,7 +46,7 @@ class SALSEFORCEFORM {
             }
             
             let filledData = {
-                email:this.email.value,
+                email:encodedEmail,
                 getUpdate: checkBoxVal,
                 oid:"00D3t000003xIvk",
                 leadCapturePath:this.pageUrl,
