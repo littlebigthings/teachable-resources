@@ -78,6 +78,9 @@ class SALSEFORCEFORM {
         var requestOptions = {
             method: "POST",
             mode: 'no-cors',
+            headers: {
+                'Content-Type': 'text/html'
+              },
         };
         try {
             const res = await fetch(
