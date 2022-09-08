@@ -18,7 +18,7 @@ function activateResizeEvt() {
 function infiniteMarquee() {
     if(carouselElem == undefined)return;
     let calcGap = (carouselElem != undefined) && parseInt(window.getComputedStyle(carouselElem.children[0]).getPropertyValue("margin-right"));
-    marquee = $(carouselElem).marquee({
+    marquee = $("[data-anim='marquee-slider']").marquee({
         duration: 30000,
         speed: 40,
         gap: 0,
