@@ -3,7 +3,7 @@ let sliderOne;
 let sliderTwo;
 let activeMarquee = false;
 let activeSlider = false;
-let carouselElem = document.querySelectorAll("[data-anim='marquee-slider']");
+let carouselElem = document.querySelector("[data-anim='marquee-slider']");
 
 function activateResizeEvt() {
     let resizeTimer;
@@ -16,7 +16,7 @@ function activateResizeEvt() {
 }
 
 function infiniteMarquee() {
-    if(!carouselElem.length>0)return;
+    if(carouselElem == undefined)return;
     let calcGap = (carouselElem != undefined) && parseInt(window.getComputedStyle(carouselElem.children[0]).getPropertyValue("margin-right"));
     marquee = $(carouselElem).marquee({
         duration: 30000,
