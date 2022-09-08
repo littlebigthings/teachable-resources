@@ -33,20 +33,23 @@ function runOnMobile(sectionEle, tabSlider) {
 }
 
 const $tabSecOne = $("[wrapper='platform']").eq(0);
-// console.log($tabSecOne)
-const tabCardsData = [
-  {
-    sliderTabs: $tabSecOne.find("[wrapper='comp-item']").parent(),
-    sliderMainImg: $tabSecOne.find("[data-img='desktop']"),
-    sliderMBImgClass: "mobile",
-    activeCardClass: "active-card",
-    cardDetailClass: "[data-info='text']",
-    textToChange: $tabSecOne.find("[data-info='desktop-text']"),
-    sectionEle: $tabSecOne,
-    aniDuration: 0.5,
-  },
-];
+if($tabSecOne != undefined){
 
-tabCardsData.forEach((echObj) => {
-  runMultipleCards(echObj);
-});
+  // console.log($tabSecOne)
+  const tabCardsData = [
+    {
+      sliderTabs: $tabSecOne.find("[wrapper='comp-item']").parent(),
+      sliderMainImg: $tabSecOne.find("[data-img='desktop']"),
+      sliderMBImgClass: "mobile",
+      activeCardClass: "active-card",
+      cardDetailClass: "[data-info='text']",
+      textToChange: $tabSecOne.find("[data-info='desktop-text']"),
+      sectionEle: $tabSecOne,
+      aniDuration: 0.5,
+    },
+  ];
+  
+  tabCardsData.forEach((echObj) => {
+    runMultipleCards(echObj);
+  });
+}

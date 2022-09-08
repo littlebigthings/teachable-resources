@@ -23,11 +23,13 @@ class TabSlider {
     this.isRunning = false;
     this.aniDuration = aniDuration;
     this.closeTab = this.closeTab.bind(this);
+    this.arrowElm = document.querySelector("[data-move='arrow']");
 
     this.init();
   }
 
   init() {
+    this.moveArrowinside();
     this.$sliderDeskImg.removeAttr("sizes srcset");
     this.activateEvents();
     this.onImagesLoaded(() => {
@@ -40,7 +42,7 @@ class TabSlider {
       let elHeight = 0;
       [...tabItem.children].forEach(chNd => {
         if (chNd.style.display != "none") {
-          elHeight = elHeight + parseInt(chNd.getBoundingClientRect().height) +  parseInt(window.getComputedStyle(chNd).getPropertyValue('margin-top'));
+          elHeight = elHeight + parseInt(chNd.getBoundingClientRect().height) + parseInt(window.getComputedStyle(chNd).getPropertyValue('margin-top'));
         }
         tabItem.setAttribute("tab-height", elHeight)
       })
@@ -73,7 +75,6 @@ class TabSlider {
       if (!$currTab.hasClass(this.activeCardClass)) {
         this.openTab($currTab, true);
       }
-
       this.mouseEnterCode(e);
     });
 
@@ -104,9 +105,9 @@ class TabSlider {
     const cardText = $btmTab.find(`${this.cardDetailClass}`).html();
     const textToActive = $currTab.find("[platform='title']");
     const openBtn = $currTab.find("[btn='open']");
-    const closeBtn = $currTab.find("[btn='close']");
+    // const closeBtn = $currTab.find("[btn='close']");
     $currTab.addClass(this.activeCardClass);
-
+    this.arrowMovement($currTab)
     // console.log(this.textToChange)
     if ($(window).width() < 767) {
       gsap.to($btmTab[0], {
@@ -114,8 +115,11 @@ class TabSlider {
         duration: this.aniDuration,
         ease: "Power1.easeInOut",
       });
-      openBtn.hide();
-      closeBtn.show();
+      if ($(window).width() < 767) {
+      // openBtn.hide();
+      // closeBtn.show();
+      gsap.to(openBtn,{ transformStyle: "preserve-3d", transform: "rotate3d(1, 0, 0, 180deg)", ease: "Power1.easeInOut", duration: this.aniDuration, })
+      }
     }
 
     if (!isMouseLeave) {
@@ -127,11 +131,11 @@ class TabSlider {
     }
 
     this.textToChange.html(cardText);
-    if(textToActive != undefined || textToActive != null)textToActive.addClass("active-platform");
+    if (textToActive != undefined || textToActive != null) textToActive.addClass("sp-active");
     this.$sliderDeskImg.attr("src", imgHref);
     // if ($(window).width() < 767) {
-      const otherTabs = this.$sliderTabs.not($currTab);
-      [...otherTabs].forEach(this.closeTab);
+    const otherTabs = this.$sliderTabs.not($currTab);
+    [...otherTabs].forEach(this.closeTab);
     // } else {
     //   const otherTabs = this.$sliderTabs;
     //   [...otherTabs].forEach(this.closeTab);
@@ -147,10 +151,10 @@ class TabSlider {
     const $currTab = $(ele);
     const $btmTab = $currTab.find("[wrapper='platform-content']");
     const openBtn = $currTab.find("[btn='open']");
-    const closeBtn = $currTab.find("[btn='close']");
+    // const closeBtn = $currTab.find("[btn='close']");
     const textToActive = $currTab.find("[platform='title']");
     $currTab.removeClass(this.activeCardClass);
-    if(textToActive != undefined || textToActive != null)textToActive.removeClass("active-platform");
+    if (textToActive != undefined || textToActive != null) textToActive.removeClass("sp-active");
     gsap.to($btmTab[0], {
       height: "0px",
       duration: this.aniDuration,
@@ -158,8 +162,9 @@ class TabSlider {
     });
 
     if ($(window).width() < 767) {
-      openBtn.show();
-      closeBtn.hide();
+      gsap.to(openBtn,{ transformStyle: "preserve-3d", transform: "rotate3d(1, 0, 0, 0deg)", ease: "Power1.easeInOut", duration: this.aniDuration, })
+      // openBtn.show();
+      // closeBtn.hide();
     }
   }
 
@@ -183,6 +188,25 @@ class TabSlider {
     this.isRunning = false;
     this.timerId && clearInterval(this.timerId);
   }
+
+  arrowMovement(tabElm) {
+    let bodyRect = tabElm[0].parentElement.getBoundingClientRect(),
+    elemRect = tabElm[0].getBoundingClientRect(),
+    offset = elemRect.top - bodyRect.top;
+    gsap.to(this.arrowElm, {
+      top: `${offset}px`,
+      duration: this.aniDuration,
+      ease: "Power1.easeInOut",
+    })
+  }
+
+  moveArrowinside(){
+    let arrowInsertHere = document.querySelector("[data-insert='arrow']")
+    if(arrowInsertHere != undefined){
+      arrowInsertHere.appendChild(this.arrowElm)
+    }
+  }
+
 }
 
 export { TabSlider };
