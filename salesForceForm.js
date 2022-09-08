@@ -79,7 +79,8 @@ class SALSEFORCEFORM {
             method: "POST",
             mode: 'no-cors',
             headers: {
-                'Content-Type': 'text/html'
+                // 'Content-Type': 'text/html'
+                'Content-Type': 'application/json'
               },
         };
         try {
