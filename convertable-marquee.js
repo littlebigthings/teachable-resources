@@ -16,6 +16,7 @@ function activateResizeEvt() {
 }
 
 function infiniteMarquee() {
+    if(carouselElem == undefined)return;
     let calcGap = (carouselElem != undefined) && parseInt(window.getComputedStyle(carouselElem.children[0]).getPropertyValue("margin-right"));
     console.log(calcGap)
     marquee = $(carouselElem).marquee({
@@ -32,8 +33,9 @@ function infiniteMarquee() {
 }
 
 function activateSliderOne() {
+    let topSwiperSlider = document.querySelectorAll(".swiper")
+    if(!topSwiperSlider.length > 0)return;
     let stretchVal = (110 / 1440) * window.innerWidth;
-    console.log("slider")
     sliderOne = new Swiper(".swiper", {
         grabCursor: false,
         slidesPerView: 1,
@@ -96,8 +98,9 @@ function changeSwiperStyle(swiper){
     }
 }
 function activateSliderTwo() {
+    let btmSwiperSlider = document.querySelector(".real-creator-wrp")
+    if(!btmSwiperSlider == undefined)return;
     let stretchVal = (110 / 1440) * window.innerWidth;
-    console.log("slider")
     sliderTwo = new Swiper(".real-creator-wrp", {
         grabCursor: false,
         slidesPerView: 1,
