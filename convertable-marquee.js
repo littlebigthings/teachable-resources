@@ -24,7 +24,7 @@ function infiniteMarquee() {
         gap: 0,
         delayBeforeStart: 4000,
         direction: 'left',
-        duplicated: true,
+        duplicated: false,
         startVisible: true,
         allowCss3Support: true,
         css3easing: "linear",
