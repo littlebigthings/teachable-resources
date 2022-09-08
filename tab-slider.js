@@ -192,7 +192,7 @@ class TabSlider {
   arrowMovement(tabElm) {
     let bodyRect = tabElm[0].parentElement.getBoundingClientRect(),
     elemRect = tabElm[0].getBoundingClientRect(),
-    offset = elemRect.top - bodyRect.top;
+    offset = elemRect.top - bodyRect.top + 5;
     gsap.to(this.arrowElm, {
       top: `${offset}px`,
       duration: this.aniDuration,
