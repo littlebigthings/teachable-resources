@@ -147,6 +147,8 @@ function marqueeOrSlider() {
     }
     else if (window.screen.width < 768 && !activeSlider) {
         if (marquee) marquee.marquee('destroy');
+        if (sliderOne) sliderOne.destroy(true, true)
+        if (sliderTwo) sliderTwo.destroy(true, true)
         activeMarquee = false;
         activeSlider = true;
         if (!isScriptsLoaded && !isCssloaded) {
@@ -208,20 +210,22 @@ function checkAndRemoveScripts() {
     let js = document.getElementById('swiperjs');
     let css = document.getElementById('swipercss');
     if (js && css) {
+        isCssloaded = false;
+        isScriptsLoaded = false;
         js.remove();
         css.remove();
         removeStyles();
         infiniteMarquee();
-    }else{
+    } else {
         infiniteMarquee();
     }
 }
 
-function removeStyles(){
+function removeStyles() {
     let allElmToRemoveStyle = document.querySelectorAll("[data-elm='style']");
-    if(allElmToRemoveStyle.length > 0){
+    if (allElmToRemoveStyle.length > 0) {
         allElmToRemoveStyle.forEach(elm => {
-            elm.setAttribute("style","");
+            elm.setAttribute("style", "");
         });
     }
 }
