@@ -58,7 +58,7 @@ function activateSliderOne() {
         loopFillGroupWithBlank: true,
         centeredSlides: true,
         autoplay: {
-            delay: 2000,
+            delay: 3000,
             disableOnInteraction: false,
         },
         pagination: {
@@ -123,7 +123,7 @@ function activateSliderTwo() {
         loopFillGroupWithBlank: true,
         centeredSlides: true,
         autoplay: {
-            delay: 2000,
+            delay: 3000,
             disableOnInteraction: false,
         },
         pagination: {
