@@ -57,10 +57,10 @@ function activateSliderOne() {
         loop: true,
         loopFillGroupWithBlank: true,
         centeredSlides: true,
-        // autoplay: {
-        //     delay: 3000,
-        //     disableOnInteraction: false,
-        // },
+        autoplay: {
+            delay: 2000,
+            disableOnInteraction: false,
+        },
         pagination: {
             el: ".pagination-one",
             clickable: true,
@@ -122,10 +122,10 @@ function activateSliderTwo() {
         loop: true,
         loopFillGroupWithBlank: true,
         centeredSlides: true,
-        // autoplay: {
-        //     delay: 3000,
-        //     disableOnInteraction: false,
-        // },
+        autoplay: {
+            delay: 2000,
+            disableOnInteraction: false,
+        },
         pagination: {
             el: ".pagination-two",
             clickable: true,
