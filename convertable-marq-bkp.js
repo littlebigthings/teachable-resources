@@ -26,19 +26,19 @@ function checkAndAutoPlay() {
     window.addEventListener("scroll", () => {
         if(isInViewport('.swiper') && !sliderOneIsRunning){
             sliderOneIsRunning = true;
-            sliderOne.autoplay.start();
+            if(sliderOne)sliderOne.autoplay.start();
         }else if(isInViewport('.real-creator-wrp') && !sliderTwoIsRunning){
             sliderTwoIsRunning = true;
-            sliderTwo.autoplay.start();
+            if(sliderTwo)sliderTwo.autoplay.start();
         }
         else if(!isInViewport('.swiper') && sliderOneIsRunning){
             sliderOneIsRunning = false;
-            sliderOne.autoplay.stop();
+            if(sliderOne)sliderOne.autoplay.stop();
            
         }
         else if(!isInViewport('.real-creator-wrp') &&  sliderTwoIsRunning){
             sliderTwoIsRunning = false;
-            sliderTwo.autoplay.stop();
+            if(sliderTwo)sliderTwo.autoplay.stop();
         }
     })
 }
