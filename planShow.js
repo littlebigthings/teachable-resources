@@ -1,3 +1,4 @@
+let callClass = false;
 class SHOWANDHIDEPLAN {
     constructor() {
         this.allPlanCta = document.querySelectorAll("[data-plan]");
@@ -63,4 +64,12 @@ class SHOWANDHIDEPLAN {
         })
     }
 }
-if (window.screen.width < 786) new SHOWANDHIDEPLAN;
+window.addEventListener("resize",()=>{
+    if (window.screen.width < 786 && !callClass){
+        callClass = true;
+        new SHOWANDHIDEPLAN;
+    }
+    else if(callClass){
+        callClass = false;
+    }
+})
