@@ -10,15 +10,11 @@ function isOnMobile() {
 }
 
 function isInViewport(secEle) {
-  if(secEle != undefined){
     var elementTop = $(secEle).offset().top;
     var elementBottom = elementTop + $(secEle).outerHeight();
     var viewportTop = $(window).scrollTop();
     var viewportBottom = viewportTop + $(window).height();
     return elementBottom > viewportTop && elementTop < viewportBottom;
-  }else{
-    return false;
-  }
 }
 
 export { isOnMobile, isInViewport };

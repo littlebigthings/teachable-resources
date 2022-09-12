@@ -12,6 +12,8 @@ let sliderOneIsRunning = false;
 let sliderTwoIsRunning = false;
 let jsLink = "https://unpkg.com/swiper/swiper-bundle.min.js"
 let cssLink = "https://unpkg.com/swiper/swiper-bundle.min.css";
+let swiperOne = document.querySelector(".swiper");
+let swiperTwo = document.querySelector(".real-creator-wrp");
 function activateResizeEvt() {
     let resizeTimer;
     $(window).on("resize", (e) => {
@@ -24,19 +26,19 @@ function activateResizeEvt() {
 
 function checkAndAutoPlay() {
     window.addEventListener("scroll", () => {
-        if(isInViewport('.swiper') && !sliderOneIsRunning && window.screen.width < 768){
+        if(swiperOne != undefined && isInViewport(swiperOne) && !sliderOneIsRunning && window.screen.width < 768){
             sliderOneIsRunning = true;
             if(sliderOne)sliderOne.autoplay.start();
-        }else if(isInViewport('.real-creator-wrp') && !sliderTwoIsRunning && window.screen.width < 768){
+        }else if(swiperTwo != undefined && isInViewport(swiperTwo) && !sliderTwoIsRunning && window.screen.width < 768){
             sliderTwoIsRunning = true;
             if(sliderTwo)sliderTwo.autoplay.start();
         }
-        else if(!isInViewport('.swiper') && sliderOneIsRunning && window.screen.width < 768){
+        else if(swiperOne != undefined && !isInViewport(swiperOne) && sliderOneIsRunning && window.screen.width < 768){
             sliderOneIsRunning = false;
             if(sliderOne)sliderOne.autoplay.stop();
            
         }
-        else if(!isInViewport('.real-creator-wrp') &&  sliderTwoIsRunning && window.screen.width < 768){
+        else if(swiperTwo != undefined && !isInViewport(swiperTwo) &&  sliderTwoIsRunning && window.screen.width < 768){
             sliderTwoIsRunning = false;
             if(sliderTwo)sliderTwo.autoplay.stop();
         }
