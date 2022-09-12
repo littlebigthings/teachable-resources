@@ -202,7 +202,7 @@ class TabSlider {
 
   moveArrowinside(){
     let arrowInsertHere = document.querySelector("[data-insert='arrow']")
-    if(arrowInsertHere != undefined){
+    if(arrowInsertHere != undefined && this.arrowElm != undefined){
       arrowInsertHere.appendChild(this.arrowElm)
     }
   }
