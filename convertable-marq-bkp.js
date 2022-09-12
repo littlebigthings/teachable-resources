@@ -28,19 +28,19 @@ function checkAndAutoPlay() {
     window.addEventListener("scroll", () => {
         if(swiperOne != undefined && isInViewport(swiperOne) && !sliderOneIsRunning && window.screen.width < 768){
             sliderOneIsRunning = true;
-            if(sliderOne)sliderOne.autoplay.start();
+            if(sliderOne != undefined)sliderOne.autoplay.start();
         }else if(swiperTwo != undefined && isInViewport(swiperTwo) && !sliderTwoIsRunning && window.screen.width < 768){
             sliderTwoIsRunning = true;
-            if(sliderTwo)sliderTwo.autoplay.start();
+            if(sliderTwo != undefined)sliderTwo.autoplay.start();
         }
         else if(swiperOne != undefined && !isInViewport(swiperOne) && sliderOneIsRunning && window.screen.width < 768){
             sliderOneIsRunning = false;
-            if(sliderOne)sliderOne.autoplay.stop();
+            if(sliderOne != undefined)sliderOne.autoplay.stop();
            
         }
         else if(swiperTwo != undefined && !isInViewport(swiperTwo) &&  sliderTwoIsRunning && window.screen.width < 768){
             sliderTwoIsRunning = false;
-            if(sliderTwo)sliderTwo.autoplay.stop();
+            if(sliderTwo != undefined)sliderTwo.autoplay.stop();
         }
     })
 }
