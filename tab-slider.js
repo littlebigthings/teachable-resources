@@ -43,8 +43,8 @@ class TabSlider {
       [...tabItem.children].forEach(chNd => {
         if (chNd.style.display != "none") {
           elHeight = elHeight + parseInt(chNd.getBoundingClientRect().height) + parseInt(window.getComputedStyle(chNd).getPropertyValue('margin-top'));
+          tabItem.setAttribute("tab-height", elHeight)
         }
-        tabItem.setAttribute("tab-height", elHeight)
       })
     })
   }
