@@ -39,14 +39,13 @@ class TabSlider {
 
   addTabHeights() {
     [...this.$sliderTabs.find("[wrapper='platform-content']")].forEach(tabItem => {
-      let elHeight = elHeight + parseInt(tabItem.getBoundingClientRect().height);
-      tabItem.setAttribute("tab-height", elHeight)
-      // [...tabItem.children].forEach(chNd => {
-      //   if (chNd.style.display != "none") {
-      //     elHeight = elHeight + parseInt(chNd.getBoundingClientRect().height) + parseInt(window.getComputedStyle(chNd).getPropertyValue('margin-top'));
-      //     tabItem.setAttribute("tab-height", elHeight)
-      //   }
-      // })
+      let elHeight = 0;
+      [...tabItem.children].forEach(chNd => {
+        if (chNd.style.display != "none") {
+          elHeight = elHeight + parseInt(chNd.getBoundingClientRect().height) + parseInt(window.getComputedStyle(chNd).getPropertyValue('margin-top'));
+        }
+        tabItem.setAttribute("tab-height", elHeight)
+      })
     })
   }
 
