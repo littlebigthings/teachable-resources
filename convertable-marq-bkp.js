@@ -24,19 +24,19 @@ function activateResizeEvt() {
 
 function checkAndAutoPlay() {
     window.addEventListener("scroll", () => {
-        if(isInViewport('.swiper') && !sliderOneIsRunning){
+        if(isInViewport('.swiper') && !sliderOneIsRunning && window.screen.width < 768){
             sliderOneIsRunning = true;
             if(sliderOne)sliderOne.autoplay.start();
-        }else if(isInViewport('.real-creator-wrp') && !sliderTwoIsRunning){
+        }else if(isInViewport('.real-creator-wrp') && !sliderTwoIsRunning && window.screen.width < 768){
             sliderTwoIsRunning = true;
             if(sliderTwo)sliderTwo.autoplay.start();
         }
-        else if(!isInViewport('.swiper') && sliderOneIsRunning){
+        else if(!isInViewport('.swiper') && sliderOneIsRunning && window.screen.width < 768){
             sliderOneIsRunning = false;
             if(sliderOne)sliderOne.autoplay.stop();
            
         }
-        else if(!isInViewport('.real-creator-wrp') &&  sliderTwoIsRunning){
+        else if(!isInViewport('.real-creator-wrp') &&  sliderTwoIsRunning && window.screen.width < 768){
             sliderTwoIsRunning = false;
             if(sliderTwo)sliderTwo.autoplay.stop();
         }
