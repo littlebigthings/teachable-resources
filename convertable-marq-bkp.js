@@ -1,3 +1,5 @@
+import { isInViewport } from './helpers.js'
+
 let marquee;
 let sliderOne;
 let sliderTwo;
@@ -6,6 +8,8 @@ let activeSlider = false;
 let carouselElem = document.querySelector("[data-anim='marquee-slider']");
 let isScriptsLoaded = false;
 let isCssloaded = false;
+let sliderOneIsRunning = false;
+let sliderTwoIsRunning = false;
 let jsLink = "https://unpkg.com/swiper/swiper-bundle.min.js"
 let cssLink = "https://unpkg.com/swiper/swiper-bundle.min.css";
 function activateResizeEvt() {
@@ -16,6 +20,27 @@ function activateResizeEvt() {
             marqueeOrSlider();
         }, 500);
     });
+}
+
+function checkAndAutoPlay() {
+    window.addEventListener("scroll", () => {
+        if(isInViewport('.swiper') && !sliderOneIsRunning){
+            sliderOneIsRunning = true;
+            sliderOne.autoplay.start();
+        }else if(isInViewport('.real-creator-wrp') && !sliderTwoIsRunning){
+            sliderTwoIsRunning = true;
+            sliderTwo.autoplay.start();
+        }
+        else if(!isInViewport('.swiper') && sliderOneIsRunning){
+            sliderOneIsRunning = false;
+            sliderOne.autoplay.stop();
+           
+        }
+        else if(!isInViewport('.real-creator-wrp') &&  sliderTwoIsRunning){
+            sliderTwoIsRunning = false;
+            sliderTwo.autoplay.stop();
+        }
+    })
 }
 
 function infiniteMarquee() {
@@ -44,7 +69,10 @@ function activateSliderOne() {
         spaceBetween: -180,
         effect: 'coverflow',
         longSwipes: false,
-        slideShadows: true,
+        loop: true,
+        loopFillGroupWithBlank: true,
+        loopAdditionalSlides: 1,
+        centeredSlides: true,
         coverflowEffect: {
             slideShadows: false,
             rotate: 0,
@@ -54,9 +82,7 @@ function activateSliderOne() {
             scale: 0.5,
             transformEl: ".success-card-link",
         },
-        loop: true,
-        loopFillGroupWithBlank: true,
-        centeredSlides: true,
+        autoplay:false,
         autoplay: {
             delay: 3000,
             disableOnInteraction: false,
@@ -109,7 +135,6 @@ function activateSliderTwo() {
         spaceBetween: -10,
         effect: 'coverflow',
         longSwipes: false,
-        slideShadows: true,
         coverflowEffect: {
             slideShadows: false,
             rotate: 0,
@@ -122,6 +147,8 @@ function activateSliderTwo() {
         loop: true,
         loopFillGroupWithBlank: true,
         centeredSlides: true,
+        loopAdditionalSlides: 1,
+        autoplay:false,
         autoplay: {
             delay: 3000,
             disableOnInteraction: false,
@@ -137,7 +164,7 @@ function activateSliderTwo() {
 }
 
 function marqueeOrSlider() {
-    if (window.screen.width > 768 && !activeMarquee) {
+    if (window.screen.width >= 768 && !activeMarquee) {
         if (marquee) marquee.marquee('destroy');
         if (sliderOne) sliderOne.destroy(true, true)
         if (sliderTwo) sliderTwo.destroy(true, true)
@@ -180,6 +207,7 @@ function checkAndInit() {
         // console.log("slider activated")
         activateSliderOne();
         activateSliderTwo();
+        checkAndAutoPlay();
     }
 }
 function injectScript(src, isScript) {
