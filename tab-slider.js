@@ -75,6 +75,9 @@ class TabSlider {
       if (!$currTab.hasClass(this.activeCardClass)) {
         this.openTab($currTab, true);
       }
+      else if ($currTab.hasClass(this.activeCardClass)) {
+        this.closeTab($currTab);
+      }
       this.mouseEnterCode(e);
     });
 
