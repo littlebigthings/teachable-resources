@@ -39,37 +39,47 @@ class SHOWANDHIDEPLAN {
         }
     }
 
-    showAndHideFeatures(planName){
-        if(this.allFeatureData.length>0){
+    showAndHideFeatures(planName) {
+        if (this.allFeatureData.length > 0) {
             this.allFeatureData.forEach(feature => {
                 let featureFor = feature.getAttribute("data-feature")
-                if(featureFor === planName){
+                if (featureFor === planName) {
                     feature.classList.remove("hide");
-                }else{
+                } else {
                     feature.classList.add("hide");
                 }
             })
         }
     }
 
-    activeCta(clickElm){
+    activeCta(clickElm) {
         this.allPlanCta.forEach(cta => {
             let activeDotElm = cta.querySelector(".radio-btn ");
-            if(cta === clickElm){
+            if (cta === clickElm) {
                 activeDotElm.classList.add("active-btn")
             }
-            else{
+            else {
                 activeDotElm.classList.remove("active-btn")
             }
         })
     }
 }
-window.addEventListener("resize",()=>{
-    if (window.screen.width < 786 && !callClass){
+window.addEventListener("load", () => {
+    if (window.screen.width < 786 && !callClass) {
         callClass = true;
         new SHOWANDHIDEPLAN;
     }
-    else if(callClass){
+    else if (callClass) {
         callClass = false;
+    }else{
+        window.addEventListener("resize", () => {
+            if (window.screen.width < 786 && !callClass) {
+                callClass = true;
+                new SHOWANDHIDEPLAN;
+            }
+            else if (callClass) {
+                callClass = false;
+            }
+        })
     }
 })
