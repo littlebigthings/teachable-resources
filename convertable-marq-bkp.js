@@ -1,4 +1,4 @@
-import { isInViewport } from './helpers.js'
+// import { isInViewport } from './helpers.js'
 
 let marquee;
 let sliderOne;
@@ -8,8 +8,8 @@ let activeSlider = false;
 let carouselElem = document.querySelector("[data-anim='marquee-slider']");
 let isScriptsLoaded = false;
 let isCssloaded = false;
-let sliderOneIsRunning = false;
-let sliderTwoIsRunning = false;
+// let sliderOneIsRunning = false;
+// let sliderTwoIsRunning = false;
 let jsLink = "https://unpkg.com/swiper/swiper-bundle.min.js"
 let cssLink = "https://unpkg.com/swiper/swiper-bundle.min.css";
 let swiperOne = document.querySelector(".swiper");
@@ -24,26 +24,30 @@ function activateResizeEvt() {
     });
 }
 
-function checkAndAutoPlay() {
-    window.addEventListener("scroll", () => {
-        if(swiperOne != undefined && isInViewport(swiperOne) && !sliderOneIsRunning && window.screen.width < 768){
-            sliderOneIsRunning = true;
-            if(sliderOne != undefined)sliderOne.autoplay.start();
-        }else if(swiperTwo != undefined && isInViewport(swiperTwo) && !sliderTwoIsRunning && window.screen.width < 768){
-            sliderTwoIsRunning = true;
-            if(sliderTwo != undefined)sliderTwo.autoplay.start();
-        }
-        else if(swiperOne != undefined && !isInViewport(swiperOne) && sliderOneIsRunning && window.screen.width < 768){
-            sliderOneIsRunning = false;
-            if(sliderOne != undefined)sliderOne.autoplay.stop();
+// function checkAndAutoPlay() {
+//     window.addEventListener("scroll", () => {
+//         if(swiperOne != undefined && isInViewport(swiperOne) && !sliderOneIsRunning && window.screen.width < 768){
+//             console.log("slide one is in view")
+//             sliderOneIsRunning = true;
+//             if(sliderOne != undefined)sliderOne.autoplay.start();
+//         }else if(swiperTwo != undefined && isInViewport(swiperTwo) && !sliderTwoIsRunning && window.screen.width < 768){
+//             console.log("slide two is in view")
+//             sliderTwoIsRunning = true;
+//             if(sliderTwo != undefined)sliderTwo.autoplay.start();
+//         }
+//         else if(swiperOne != undefined && !isInViewport(swiperOne) && sliderOneIsRunning && window.screen.width < 768){
+//             console.log("slide one is not in view")
+//             sliderOneIsRunning = false;
+//             if(sliderOne != undefined)sliderOne.autoplay.stop();
            
-        }
-        else if(swiperTwo != undefined && !isInViewport(swiperTwo) &&  sliderTwoIsRunning && window.screen.width < 768){
-            sliderTwoIsRunning = false;
-            if(sliderTwo != undefined)sliderTwo.autoplay.stop();
-        }
-    })
-}
+//         }
+//         else if(swiperTwo != undefined && !isInViewport(swiperTwo) &&  sliderTwoIsRunning && window.screen.width < 768){
+//             console.log("slide two is in view")
+//             sliderTwoIsRunning = false;
+//             if(sliderTwo != undefined)sliderTwo.autoplay.stop();
+//         }
+//     })
+// }
 
 function infiniteMarquee() {
     if (carouselElem == undefined) return;
@@ -68,7 +72,7 @@ function activateSliderOne() {
     sliderOne = new Swiper(".swiper", {
         grabCursor: false,
         slidesPerView: 1,
-        spaceBetween: -180,
+        spaceBetween: -100,
         effect: 'coverflow',
         longSwipes: false,
         loop: true,
@@ -79,16 +83,16 @@ function activateSliderOne() {
             slideShadows: false,
             rotate: 0,
             stretch: stretchVal,
-            depth: 10,
-            modifier: 1,
-            scale: 0.5,
+            depth: 0,
+            modifier: 0,
+            scale: 0,
             transformEl: ".success-card-link",
         },
         autoplay:false,
-        autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-        },
+        // autoplay: {
+        //     delay: 3000,
+        //     disableOnInteraction: false,
+        // },
         pagination: {
             el: ".pagination-one",
             clickable: true,
@@ -151,10 +155,10 @@ function activateSliderTwo() {
         centeredSlides: true,
         loopAdditionalSlides: 1,
         autoplay:false,
-        autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-        },
+        // autoplay: {
+        //     delay: 3000,
+        //     disableOnInteraction: false,
+        // },
         pagination: {
             el: ".pagination-two",
             clickable: true,
@@ -206,10 +210,9 @@ function marqueeOrSlider() {
 
 function checkAndInit() {
     if (isCssloaded && isScriptsLoaded) {
-        // console.log("slider activated")
         activateSliderOne();
         activateSliderTwo();
-        checkAndAutoPlay();
+        // checkAndAutoPlay();
     }
 }
 function injectScript(src, isScript) {
