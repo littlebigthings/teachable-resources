@@ -64,14 +64,14 @@ class SHOWANDHIDEPLAN {
         })
     }
 }
-window.addEventListener("load", () => {
+function startRadioButton() {
     if (window.screen.width < 786 && !callClass) {
         callClass = true;
         new SHOWANDHIDEPLAN;
     }
     else if (callClass) {
         callClass = false;
-    }else{
+    } else {
         window.addEventListener("resize", () => {
             if (window.screen.width < 786 && !callClass) {
                 callClass = true;
@@ -82,4 +82,5 @@ window.addEventListener("load", () => {
             }
         })
     }
-})
+}
+startRadioButton();

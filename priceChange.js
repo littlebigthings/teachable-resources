@@ -19,6 +19,7 @@ class UPDATEPRICE {
 
     listenToClick() {
         this.allButtons.forEach(btn => {
+            btn.removeAttribute("href")
             btn.addEventListener("click", (e) => {
                 let toShowPrice = e.target.getAttribute("button");
                 if (toShowPrice.length > 0) {
