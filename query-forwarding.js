@@ -26,7 +26,7 @@ $('a').each(function() {
     if(href && params // 👈 null and undefined check
     && Object.keys(params).length != 0
     && Object.getPrototypeOf(params) === Object.prototype
-    && href.indexOf('#') < 0){
+    && !href.hash){
         // if existing url doesn't have 
         // if()
         // console.log(querystring);
