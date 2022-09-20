@@ -1,3 +1,12 @@
+if ('URLSearchParams' in window) {
+    console.log("Browser supports URLSearchParams");
+} else if(location.host == 'teachable-summit-2022.webflow.io') {
+    const polyfill = 'https://unpkg.com/@ungap/url-search-params@0.2.2/min.js';
+    const polyfillScript = document.createElement('script');
+    polyfillScript.setAttribute('src', polyfill);
+    document.head.appendChild(polyfillScript);
+}
+
 const querystring = new URLSearchParams(window.location.search);
 const params = Object.fromEntries(querystring.entries());
 
